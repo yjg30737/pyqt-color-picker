@@ -15,10 +15,10 @@ class ColorPickerDialog(QDialog):
         self.setWindowTitle(title)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
 
-        self.__colorPicker = ColorPickerWidget()
+        self.__colorPickerWidget = ColorPickerWidget()
 
         lay = QHBoxLayout()
-        lay.addWidget(self.__colorPicker)
+        lay.addWidget(self.__colorPickerWidget)
         lay.setContentsMargins(0, 0, 0, 0)
 
         topWidget = QWidget()
@@ -49,7 +49,7 @@ class ColorPickerDialog(QDialog):
         return super().accept()
 
     def getColor(self):
-        return self.__current_color
+        return self.__colorPickerWidget.getCurrentColor()
 
 
 if __name__ == "__main__":
