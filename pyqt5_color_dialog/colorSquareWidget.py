@@ -1,8 +1,8 @@
 import math
 
-from PyQt5.QtWidgets import QWidget, QFrame, QVBoxLayout, QGridLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel
 
-from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QSize, QRect
+from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect
 
 
 class ColorSquareWidget(QWidget):

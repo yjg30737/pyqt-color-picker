@@ -1,7 +1,7 @@
 import math
 
 from PyQt5.QtCore import QPoint, Qt, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QFrame, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel
 
 
 class ColorHueBarWidget(QWidget):

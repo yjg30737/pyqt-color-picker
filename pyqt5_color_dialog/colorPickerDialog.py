@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QDialog, QApplication, QHBoxLayout, QPushButton, QWidget, QVBoxLayout
 from PyQt5.QtCore import Qt
 
-from PyQt.module.colorPicker.colorPickerForRefac.colorPickerWidget import ColorPickerWidget
+from pyqt5_color_dialog.colorPickerWidget import ColorPickerWidget
 
 
 class ColorPickerDialog(QDialog):
