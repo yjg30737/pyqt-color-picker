@@ -9,20 +9,19 @@ from pyqt5_color_dialog.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
-    def __init__(self):
+    def __init__(self, color: QColor = QColor(255, 255, 255)):
         super().__init__()
-        self.__initUi()
+        self.__initUi(color=color)
 
-    def __initUi(self):
-        self.__colorSquareWidget = ColorSquareWidget()
+    def __initUi(self, color: QColor):
+        self.__colorSquareWidget = ColorSquareWidget(color)
         self.__colorSquareWidget.colorChanged.connect(self.__colorChanged)
 
-        self.__colorHueBarWidget = ColorHueBarWidget()
+        self.__colorHueBarWidget = ColorHueBarWidget(color)
         self.__colorHueBarWidget.hueChanged.connect(self.__hueChanged)
         self.__colorHueBarWidget.hueChangedByEditor.connect(self.__hueChangedByEditor)
 
-        self.__colorEditorWidget = ColorEditorWidget()
-        self.__colorEditorWidget.setColor(255, 255, 255)
+        self.__colorEditorWidget = ColorEditorWidget(color)
         self.__colorEditorWidget.colorChanged.connect(self.__colorChangedByEditor)
 
         lay = QHBoxLayout()
@@ -47,12 +46,13 @@ class ColorPickerWidget(QWidget):
         
     def __colorChanged(self, h, s, l):
         r, g, b = self.hsv2rgb(h / 100, s, l)
-        self.__colorEditorWidget.setColor(r, g, b)
+        color = QColor(r, g, b)
+        self.__colorEditorWidget.setColor(color)
 
     def __colorChangedByEditor(self, color: QColor):
         h, s, v = colorsys.rgb_to_hsv(color.redF(), color.greenF(), color.blueF())
         self.__colorHueBarWidget.moveSelectorByEditor(h)
         self.__colorSquareWidget.moveSelectorByEditor(s, v)
-        
+
     def getCurrentColor(self):
         return self.__colorEditorWidget.getCurrentColor()

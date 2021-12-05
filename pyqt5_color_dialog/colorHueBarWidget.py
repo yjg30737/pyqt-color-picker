@@ -1,6 +1,7 @@
-import math
+import math, colorsys
 
 from PyQt5.QtCore import QPoint, Qt, pyqtSignal
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QLabel
 
 
@@ -8,11 +9,11 @@ class ColorHueBarWidget(QWidget):
     hueChanged = pyqtSignal(int)
     hueChangedByEditor = pyqtSignal(int)
 
-    def __init__(self):
+    def __init__(self, color: QColor = QColor(255, 255, 255)):
         super().__init__()
-        self.__initUi()
+        self.__initUi(color)
 
-    def __initUi(self):
+    def __initUi(self, color: QColor):
         self.__hue_bar_height = 300
         self.__hue_bar_width = 20
         self.setMinimumSize(self.__hue_bar_width, self.__hue_bar_height)
@@ -44,10 +45,13 @@ class ColorHueBarWidget(QWidget):
         self.__selector.setStyleSheet('background-color: white; border: 2px solid #222; ')
         self.__selector.setText("")
 
-        hueFrame.mouseMoveEvent = self.__moveSelector
-        hueFrame.mousePressEvent = self.__moveSelector
+        hueFrame.mouseMoveEvent = self.__moveSelectorByCursor
+        hueFrame.mousePressEvent = self.__moveSelectorByCursor
 
-    def __moveSelector(self, e):
+        h, s, v = colorsys.rgb_to_hsv(color.redF(), color.greenF(), color.blueF())
+        self.__initHueSelector(h)
+
+    def __moveSelectorByCursor(self, e):
         if e.buttons() == Qt.LeftButton:
             pos = e.pos().y() - math.floor(self.__selector_height/2)
             if pos < 0:
@@ -58,11 +62,17 @@ class ColorHueBarWidget(QWidget):
 
             h = self.__selector.y() / self.__selector_moving_range * 100
             self.hueChanged.emit(h)
-            
-    def moveSelectorByEditor(self, h):
+
+    def __moveSelectorNotByCursor(self, h):
         geo = self.__selector.geometry()
-        geo.moveTo(0, h * self.height())
+        geo.moveTo(0, h * self.minimumHeight())
         self.__selector.setGeometry(geo)
 
         h = self.__selector.y() / self.__selector_moving_range * 100
         self.hueChangedByEditor.emit(h)
+
+    def __initHueSelector(self, h):
+        self.__moveSelectorNotByCursor(h)
+
+    def moveSelectorByEditor(self, h):
+        self.__moveSelectorNotByCursor(h)

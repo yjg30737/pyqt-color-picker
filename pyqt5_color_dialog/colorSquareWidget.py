@@ -1,5 +1,6 @@
-import math
+import math, colorsys
 
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel
 
 from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect
@@ -8,15 +9,19 @@ from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect
 class ColorSquareWidget(QWidget):
     colorChanged = pyqtSignal(float, float, float)
 
-    def __init__(self):
+    def __init__(self, color: QColor = QColor(255, 255, 255)):
         super().__init__()
-        self.__h = 0
-        self.__s = 0
-        self.__l = 1
-        self.__initUi()
+        self.__initUi(color)
 
-    def __initUi(self):
+    def __initUi(self, color: QColor):
         self.setMinimumSize(300, 300)
+
+        self.__h, \
+        self.__s, \
+        self.__l = colorsys.rgb_to_hsv(color.redF(), color.greenF(), color.blueF())
+
+        # Multiply 100 for insert into stylesheet code
+        self.__h *= 100
 
         self.__colorView = QWidget()
         self.__colorView.setStyleSheet(f'''
@@ -35,8 +40,8 @@ class ColorSquareWidget(QWidget):
             border-radius: 5px;
         ''')
 
-        self.__blackOverlay.mouseMoveEvent = self.__moveSelector
-        self.__blackOverlay.mousePressEvent = self.__moveSelector
+        self.__blackOverlay.mouseMoveEvent = self.__moveSelectorByCursor
+        self.__blackOverlay.mousePressEvent = self.__moveSelectorByCursor
 
         self.__selector_diameter = 12
 
@@ -70,7 +75,19 @@ class ColorSquareWidget(QWidget):
 
         self.setLayout(lay)
 
-    def __moveSelector(self, e):
+        self.__initSelector()
+
+    def __moveSelectorNotByCursor(self, s, l):
+        geo = self.__selector.geometry()
+        x = self.minimumWidth() * s
+        y = self.minimumHeight() - self.minimumHeight() * l
+        geo.moveCenter(QPoint(x, y))
+        self.__selector.setGeometry(geo)
+
+    def __initSelector(self):
+        self.__moveSelectorNotByCursor(self.__s, self.__l)
+
+    def __moveSelectorByCursor(self, e):
         if e.buttons() == Qt.LeftButton:
             pos = e.pos()
             if pos.x() < 0:
@@ -111,20 +128,16 @@ class ColorSquareWidget(QWidget):
         ''')
 
     def __setSaturation(self):
-        self.__s = (self.__selector.pos().x()+math.floor(self.__selector_diameter/2)) / self.width()
+        self.__s = (self.__selector.pos().x()+math.floor(self.__selector_diameter/2)) / self.minimumWidth()
 
     def getSaturatation(self):
         return self.__s
 
     def __setLightness(self):
-        self.__l = abs(((self.__selector.pos().y()+math.floor(self.__selector_diameter/2)) / self.height()) - 1)
+        self.__l = abs(((self.__selector.pos().y()+math.floor(self.__selector_diameter/2)) / self.minimumHeight()) - 1)
 
     def getLightness(self):
         return self.__l
 
     def moveSelectorByEditor(self, s, l):
-        geo = self.__selector.geometry()
-        x = self.width() * s
-        y = self.height() - self.height() * l
-        geo.moveCenter(QPoint(x, y))
-        self.__selector.setGeometry(geo)
+        self.__moveSelectorNotByCursor(s, l)

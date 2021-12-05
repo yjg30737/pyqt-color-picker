@@ -6,12 +6,12 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QSpinBox, QLineEd
 class ColorEditorWidget(QWidget):
     colorChanged = pyqtSignal(QColor)
 
-    def __init__(self):
+    def __init__(self, color: QColor = QColor(255, 255, 255)):
         super().__init__()
-        self.__current_color = QColor(255, 255, 255)
-        self.__initUi()
+        self.__current_color = color
+        self.__initUi(color)
 
-    def __initUi(self):
+    def __initUi(self, color: QColor):
         self.__colorPreviewWithGraphics = QWidget()
         self.__colorPreviewWithGraphics.setMinimumSize(100, 75)
         self.setColorPreviewWithGraphics()
@@ -54,12 +54,14 @@ class ColorEditorWidget(QWidget):
 
         self.setLayout(lay)
 
+        self.setColor(color)
+
     def setColorPreviewWithGraphics(self):
         self.__colorPreviewWithGraphics.setStyleSheet(f' border-radius: 5px; '
                                                       f'background-color: {self.__current_color.name()}; ')
 
-    def setColor(self, r, g, b):
-        self.__current_color = QColor(r, g, b)
+    def setColor(self, color: QColor = QColor(255, 255, 255)):
+        self.__current_color = color
         self.setColorPreviewWithGraphics()
         self.__hLineEdit.setText(self.__current_color.name())
 
@@ -67,6 +69,8 @@ class ColorEditorWidget(QWidget):
         self.__rSpinBox.valueChanged.disconnect(self.__rColorChanged)
         self.__gSpinBox.valueChanged.disconnect(self.__gColorChanged)
         self.__bSpinBox.valueChanged.disconnect(self.__bColorChanged)
+
+        r, g, b = self.__current_color.red(), self.__current_color.green(), self.__current_color.blue()
 
         self.__rSpinBox.setValue(r)
         self.__gSpinBox.setValue(g)
