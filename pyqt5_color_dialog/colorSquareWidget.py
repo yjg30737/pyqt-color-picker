@@ -119,7 +119,9 @@ class ColorSquareWidget(QWidget):
         self.colorChanged.emit(self.__h, self.__s, self.__l)
 
     def changeHueByEditor(self, h):
-        self.__h = h
+        # Prevent hue from becoming larger than 100
+        # if hue becomes larger than 100, hue of square will turn into dark.
+        self.__h = min(100, h)
         self.__colorView.setStyleSheet(f'''
             border-radius: 5px;
             background-color: qlineargradient(x1:1, x2:0,

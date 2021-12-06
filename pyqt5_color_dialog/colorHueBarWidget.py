@@ -65,7 +65,11 @@ class ColorHueBarWidget(QWidget):
 
     def __moveSelectorNotByCursor(self, h):
         geo = self.__selector.geometry()
-        geo.moveTo(0, h * self.minimumHeight())
+
+        # Prevent y from becoming larger than minimumHeight
+        # if y becomes larger than minimumHeight, selector will be placed out of the bottom boundary.
+        y = min(self.__selector_moving_range, h * self.minimumHeight())
+        geo.moveTo(0, y)
         self.__selector.setGeometry(geo)
 
         h = self.__selector.y() / self.__selector_moving_range * 100
