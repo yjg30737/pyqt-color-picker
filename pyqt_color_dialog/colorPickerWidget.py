@@ -3,9 +3,9 @@ import colorsys
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout
 
-from pyqt5_color_dialog.colorHueBarWidget import ColorHueBarWidget
-from pyqt5_color_dialog.colorEditorWidget import ColorEditorWidget
-from pyqt5_color_dialog.colorSquareWidget import ColorSquareWidget
+from pyqt_color_dialog.colorHueBarWidget import ColorHueBarWidget
+from pyqt_color_dialog.colorEditorWidget import ColorEditorWidget
+from pyqt_color_dialog.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
