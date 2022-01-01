@@ -1,11 +1,11 @@
-# pyqt5-color-dialog
-PyQt5 Color Dialog
+# pyqt-color-dialog
+PyQt Color Dialog
 
 ## Requirements
 PyQt5 >= 5.8
 
 ## Setup
-```pip3 install git+https://github.com/yjg30737/pyqt5-color-dialog.git --upgrade```
+```pip3 install git+https://github.com/yjg30737/pyqt-color-dialog.git --upgrade```
 
 ## Usage
 Code Sample
