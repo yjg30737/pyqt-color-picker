@@ -4,6 +4,7 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel
 
 from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect
+from pyqt_resource_helper import PyQtResourceHelper
 
 
 class ColorSquareWidget(QWidget):
@@ -32,13 +33,7 @@ class ColorSquareWidget(QWidget):
         ''')
 
         self.__blackOverlay = QWidget()
-        self.__blackOverlay.setStyleSheet('''
-            background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, 
-            stop:0 rgba(0, 0, 0, 0), 
-            stop:1 rgba(0, 0, 0, 255));
-            width:100%;
-            border-radius: 5px;
-        ''')
+        PyQtResourceHelper.setStyleSheet([self.__blackOverlay], ['style/black_overlay.css'])
 
         self.__blackOverlay.mouseMoveEvent = self.__moveSelectorByCursor
         self.__blackOverlay.mousePressEvent = self.__moveSelectorByCursor
@@ -50,23 +45,14 @@ class ColorSquareWidget(QWidget):
                                     math.floor(self.__selector_diameter/2) * -1,
                                     self.__selector_diameter,
                                     self.__selector_diameter)
-        self.__selector.setStyleSheet('''
-            background-color: none;
-            border: 1px solid white;
-            border-radius: 5px;
-        ''')
+        PyQtResourceHelper.setStyleSheet([self.__selector], ['style/color_selector.css'])
 
         self.__blackRingInsideSelector = QLabel(self.__selector)
         self.__blackRingInsideSelector_diameter = self.__selector_diameter-2
         self.__blackRingInsideSelector.setGeometry(QRect(1, 1, self.__blackRingInsideSelector_diameter,
                                                                self.__blackRingInsideSelector_diameter))
-        self.__blackRingInsideSelector.setStyleSheet('''
-            background-color: none;
-            border: 1px solid black;
-            border-radius: 5px;
-        ''')
 
-        self.__blackRingInsideSelector.setText("")
+        PyQtResourceHelper.setStyleSheet([self.__blackRingInsideSelector], ['style/black_ring_of_color_selector.css'])
         
         lay = QGridLayout()
         lay.addWidget(self.__colorView, 0, 0, 1, 1)
