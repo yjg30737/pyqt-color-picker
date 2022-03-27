@@ -54,11 +54,3 @@ class ColorPickerDialog(QDialog):
 
     def getColor(self):
         return self.__colorPickerWidget.getCurrentColor()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    colorPickerDialog = ColorPickerDialog(QColor(177, 255, 63))
-    colorPickerDialog.show()
-    app.exec_()
-
