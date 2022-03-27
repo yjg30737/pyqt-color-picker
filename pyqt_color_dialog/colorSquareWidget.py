@@ -25,7 +25,6 @@ class ColorSquareWidget(QWidget):
         self.__h *= 100
 
         self.__colorView = QWidget()
-        PyQtResourceHelper.setStyleSheet([self.__colorView], ['style/color_view.css'])
         self.__colorView.setStyleSheet(f'''
             background-color: qlineargradient(x1:1, x2:0, 
             stop:0 hsl({self.__h}%,100%,50%), 

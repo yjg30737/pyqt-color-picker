@@ -1,7 +1,0 @@
-QWidget
-{{
-background-color: qlineargradient(x1:1, x2:0,
-stop:0 hsl({self.__h}%,100%,50%),
-stop:1 #fff);
-border-radius: 5px;
-}}
