@@ -10,11 +10,11 @@ class ColorHueBarWidget(QWidget):
     hueChanged = pyqtSignal(int)
     hueChangedByEditor = pyqtSignal(int)
 
-    def __init__(self, color: QColor = QColor(255, 255, 255)):
+    def __init__(self, color):
         super().__init__()
         self.__initUi(color)
 
-    def __initUi(self, color: QColor):
+    def __initUi(self, color):
         self.__hue_bar_height = 300
         self.__hue_bar_width = 20
         self.setMinimumSize(self.__hue_bar_width, self.__hue_bar_height)

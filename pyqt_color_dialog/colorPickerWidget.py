@@ -9,11 +9,11 @@ from pyqt_color_dialog.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
-    def __init__(self, color: QColor = QColor(255, 255, 255)):
+    def __init__(self, color):
         super().__init__()
         self.__initUi(color=color)
 
-    def __initUi(self, color: QColor):
+    def __initUi(self, color):
         self.__colorSquareWidget = ColorSquareWidget(color)
         self.__colorSquareWidget.colorChanged.connect(self.__colorChanged)
 

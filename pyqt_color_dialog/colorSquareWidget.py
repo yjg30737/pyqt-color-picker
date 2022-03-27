@@ -10,11 +10,11 @@ from pyqt_resource_helper import PyQtResourceHelper
 class ColorSquareWidget(QWidget):
     colorChanged = pyqtSignal(float, float, float)
 
-    def __init__(self, color: QColor = QColor(255, 255, 255)):
+    def __init__(self, color):
         super().__init__()
         self.__initUi(color)
 
-    def __initUi(self, color: QColor):
+    def __initUi(self, color):
         self.setMinimumSize(300, 300)
 
         self.__h, \

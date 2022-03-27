@@ -6,12 +6,12 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QSpinBox, QLineEd
 class ColorEditorWidget(QWidget):
     colorChanged = pyqtSignal(QColor)
 
-    def __init__(self, color: QColor = QColor(255, 255, 255)):
+    def __init__(self, color):
         super().__init__()
         self.__current_color = color
         self.__initUi(color)
 
-    def __initUi(self, color: QColor):
+    def __initUi(self, color):
         self.__colorPreviewWithGraphics = QWidget()
         self.__colorPreviewWithGraphics.setMinimumSize(100, 75)
         self.setColorPreviewWithGraphics()
@@ -60,7 +60,7 @@ class ColorEditorWidget(QWidget):
         self.__colorPreviewWithGraphics.setStyleSheet(f' border-radius: 5px; '
                                                       f'background-color: {self.__current_color.name()}; ')
 
-    def setColor(self, color: QColor = QColor(255, 255, 255)):
+    def setColor(self, color):
         self.__current_color = color
         self.setColorPreviewWithGraphics()
         self.__hLineEdit.setText(self.__current_color.name())
