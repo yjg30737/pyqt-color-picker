@@ -8,12 +8,15 @@ from pyqt_color_dialog.colorPickerWidget import ColorPickerWidget
 
 
 class ColorPickerDialog(QDialog):
-    def __init__(self, color: QColor = QColor(255, 255, 255), title='Color Picker'):
+    def __init__(self, color=QColor(255, 255, 255)):
         super().__init__()
-        self.__initUi(color=color, title=title)
+        if isinstance(color, QColor):
+            pass
+        elif isinstance(color, str):
+            color = QColor(color)
+        self.__initUi(color=color)
 
-    def __initUi(self, color: QColor, title):
-        self.setWindowTitle(title)
+    def __initUi(self, color):
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
 
         self.__colorPickerWidget = ColorPickerWidget(color)
