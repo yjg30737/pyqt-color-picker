@@ -1,7 +1,5 @@
-import sys
-
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QDialog, QApplication, QHBoxLayout, QPushButton, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QDialog, QHBoxLayout, QPushButton, QWidget, QVBoxLayout
 from PyQt5.QtCore import Qt
 
 from pyqt_color_dialog.colorPickerWidget import ColorPickerWidget
