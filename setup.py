@@ -10,7 +10,7 @@ setup(
     package_data={'pyqt_color_dialog.style': ['black_overlay.css', 'black_ring_of_color_selector.css',
                                               'color_selector.css', 'hue_bg.css', 'hue_frame.css',
                                               'hue_selector.css']},
-    description='PyQt Color Dialog',
+    description='PyQt color picker dialog',
     url='https://github.com/yjg30737/pyqt-color-dialog.git',
     install_requires=[
         'PyQt5>=5.8',
