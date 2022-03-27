@@ -7,6 +7,10 @@ PyQt5 >= 5.8
 ## Setup
 ```pip3 install git+https://github.com/yjg30737/pyqt-color-dialog.git --upgrade```
 
+## Class, Method Overview
+* `ColorPickerDialog(color=QColor(255, 255, 255))` - Color argument's type can be `QColor`, `str`.
+* `getColor() -> QColor`
+
 ## Usage
 Code Sample
 
