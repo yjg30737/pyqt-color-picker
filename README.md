@@ -1,5 +1,5 @@
 # pyqt-color-dialog
-PyQt Color Dialog
+PyQt color picker dialog
 
 ## Requirements
 PyQt5 >= 5.8
