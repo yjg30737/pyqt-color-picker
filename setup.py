@@ -1,8 +1,16 @@
+import codecs
+import os
+
 from setuptools import setup, find_packages
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
+    long_description = "\n" + fh.read()
 
 setup(
     name='pyqt-color-dialog',
-    version='0.2.1',
+    version='0.0.1',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
@@ -12,8 +20,10 @@ setup(
                                               'hue_selector.css']},
     description='PyQt color picker dialog',
     url='https://github.com/yjg30737/pyqt-color-dialog.git',
+    long_description_content_type='text/markdown',
+    long_description=long_description,
     install_requires=[
         'PyQt5>=5.8',
-        'pyqt-resource-helper @ git+https://git@github.com/yjg30737/pyqt-resource-helper.git@main'
+        'pyqt-resource-helper>=0.0.1'
     ]
 )
