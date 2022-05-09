@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pyqt_color_dialog.iml" filepath="$PROJECT_DIR$/.idea/pyqt_color_dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pyqt_color_picker.iml" filepath="$PROJECT_DIR$/.idea/pyqt_color_picker.iml" />
     </modules>
   </component>
 </project>
