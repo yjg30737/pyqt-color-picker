@@ -19,7 +19,7 @@ setup(
                                               'color_selector.css', 'hue_bg.css', 'hue_frame.css',
                                               'hue_selector.css']},
     description='PyQt color picker dialog',
-    url='https://github.com/yjg30737/pyqt-color-dialog.git',
+    url='https://github.com/yjg30737/pyqt-color-picker.git',
     long_description_content_type='text/markdown',
     long_description=long_description,
     install_requires=[
