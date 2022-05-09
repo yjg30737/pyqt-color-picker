@@ -9,7 +9,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
 setup(
-    name='pyqt-color-dialog',
+    name='pyqt-color-picker',
     version='0.0.1',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
