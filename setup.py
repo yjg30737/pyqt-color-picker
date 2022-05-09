@@ -10,12 +10,12 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 setup(
     name='pyqt-color-picker',
-    version='0.0.1',
+    version='0.0.11',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
     packages=find_packages(),
-    package_data={'pyqt_color_dialog.style': ['black_overlay.css', 'black_ring_of_color_selector.css',
+    package_data={'pyqt_color_picker.style': ['black_overlay.css', 'black_ring_of_color_selector.css',
                                               'color_selector.css', 'hue_bg.css', 'hue_frame.css',
                                               'hue_selector.css']},
     description='PyQt color picker dialog',
