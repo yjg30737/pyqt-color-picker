@@ -1,11 +1,11 @@
-# pyqt-color-dialog
+# pyqt-color-picker
 PyQt color picker dialog
 
 ## Requirements
 PyQt5 >= 5.8
 
 ## Setup
-`python -m pip install pyqt-color-dialog`
+`python -m pip install pyqt-color-picker`
 
 ## Class, Method Overview
 * `ColorPickerDialog(color=QColor(255, 255, 255))` - Color argument's type can be `QColor`, `str`.
