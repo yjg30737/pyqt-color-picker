@@ -10,7 +10,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 setup(
     name='pyqt-color-picker',
-    version='0.0.17',
+    version='0.0.18',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
