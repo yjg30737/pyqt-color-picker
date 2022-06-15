@@ -1,17 +1,17 @@
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QSpinBox, QLineEdit
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QSpinBox, QLineEdit
 
 
 class ColorEditorWidget(QWidget):
     colorChanged = pyqtSignal(QColor)
 
-    def __init__(self, color):
+    def __init__(self, color, orientation):
         super().__init__()
         self.__current_color = color
-        self.__initUi(color)
+        self.__initUi(color, orientation)
 
-    def __initUi(self, color):
+    def __initUi(self, color, orientation):
         self.__colorPreviewWithGraphics = QWidget()
         self.__colorPreviewWithGraphics.setFixedWidth(200)
         self.__colorPreviewWithGraphics.setMinimumHeight(75)
@@ -46,8 +46,10 @@ class ColorEditorWidget(QWidget):
 
         colorEditor = QWidget()
         colorEditor.setLayout(lay)
-
-        lay = QVBoxLayout()
+        if orientation == 'horizontal':
+            lay = QVBoxLayout()
+        elif orientation == 'vertical':
+            lay = QHBoxLayout()
         lay.addWidget(self.__colorPreviewWithGraphics)
         lay.addWidget(colorEditor)
 

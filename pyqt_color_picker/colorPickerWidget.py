@@ -26,7 +26,7 @@ class ColorPickerWidget(QWidget):
         self.__colorHueBarWidget.hueChanged.connect(self.__hueChanged)
         self.__colorHueBarWidget.hueChangedByEditor.connect(self.__hueChangedByEditor)
 
-        self.__colorEditorWidget = ColorEditorWidget(color)
+        self.__colorEditorWidget = ColorEditorWidget(color, orientation)
         self.__colorEditorWidget.colorChanged.connect(self.__colorChangedByEditor)
 
         if orientation == 'horizontal':
