@@ -1,5 +1,7 @@
 # pyqt-color-picker
-PyQt color picker dialog
+PyQt color picker dialog which contains color picker widget.
+
+You can either use dialog or widget.
 
 ## Requirements
 PyQt5 >= 5.8
