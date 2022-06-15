@@ -9,8 +9,12 @@ from pyqt_color_picker.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
-    def __init__(self, color):
+    def __init__(self, color=QColor(255, 255, 255)):
         super().__init__()
+        if isinstance(color, QColor):
+            pass
+        elif isinstance(color, str):
+            color = QColor(color)
         self.__initUi(color=color)
 
     def __initUi(self, color):
@@ -37,13 +41,13 @@ class ColorPickerWidget(QWidget):
 
     def __hueChanged(self, h):
         self.__colorSquareWidget.changeHue(h)
-        
+
     def __hueChangedByEditor(self, h):
         self.__colorSquareWidget.changeHueByEditor(h)
-        
+
     def hsv2rgb(self, h, s, v):
         return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h, s, v))
-        
+
     def __colorChanged(self, h, s, l):
         r, g, b = self.hsv2rgb(h / 100, s, l)
         color = QColor(r, g, b)
