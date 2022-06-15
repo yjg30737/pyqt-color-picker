@@ -1,8 +1,8 @@
 import colorsys
 
 from PyQt5.QtGui import QColor
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QSizePolicy, QGridLayout
 
 from pyqt_color_picker.colorHueBarWidget import ColorHueBarWidget
 from pyqt_color_picker.colorEditorWidget import ColorEditorWidget
@@ -10,6 +10,8 @@ from pyqt_color_picker.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
+    colorChanged = pyqtSignal(QColor)
+
     def __init__(self, color=QColor(255, 255, 255), orientation='horizontal'):
         super().__init__()
         if isinstance(color, QColor):
@@ -26,7 +28,7 @@ class ColorPickerWidget(QWidget):
         self.__colorHueBarWidget.hueChanged.connect(self.__hueChanged)
         self.__colorHueBarWidget.hueChangedByEditor.connect(self.__hueChangedByEditor)
 
-        self.__colorEditorWidget = ColorEditorWidget(color, orientation)
+        self.__colorEditorWidget = ColorEditorWidget(color, orientation=orientation)
         self.__colorEditorWidget.colorChanged.connect(self.__colorChangedByEditor)
 
         if orientation == 'horizontal':
@@ -60,11 +62,13 @@ class ColorPickerWidget(QWidget):
         r, g, b = self.hsv2rgb(h / 100, s, l)
         color = QColor(r, g, b)
         self.__colorEditorWidget.setColor(color)
+        self.colorChanged.emit(color)
 
     def __colorChangedByEditor(self, color: QColor):
         h, s, v = colorsys.rgb_to_hsv(color.redF(), color.greenF(), color.blueF())
         self.__colorHueBarWidget.moveSelectorByEditor(h)
         self.__colorSquareWidget.moveSelectorByEditor(s, v)
+        self.colorChanged.emit(color)
 
     def getCurrentColor(self):
         return self.__colorEditorWidget.getCurrentColor()
