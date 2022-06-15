@@ -13,7 +13,7 @@ PyQt5 >= 5.8
   * `orientation` argument decides the overall layout direction of the dialog. There are two values. `'horizontal'`, `'vertical'`. See layout preview below.
 * `getColor() -> QColor` - get the color.
 
-If you only want to use this as a part of window(not as whole dialog), use `ColorPickerWidget(color=QColor(255, 255, 255), orientation='horizontal')`.
+If you only want to use this as a part of window(not as whole dialog), use `ColorPickerWidget(color=QColor(255, 255, 255), orientation='horizontal')`. See the example below.
 
 ### Layout type
 
