@@ -6,18 +6,18 @@ from pyqt_color_picker.colorPickerWidget import ColorPickerWidget
 
 
 class ColorPickerDialog(QDialog):
-    def __init__(self, color=QColor(255, 255, 255)):
+    def __init__(self, color=QColor(255, 255, 255), orientation='horizontal'):
         super().__init__()
         if isinstance(color, QColor):
             pass
         elif isinstance(color, str):
             color = QColor(color)
-        self.__initUi(color=color)
+        self.__initUi(color=color, orientation=orientation)
 
-    def __initUi(self, color):
+    def __initUi(self, color, orientation):
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
 
-        self.__colorPickerWidget = ColorPickerWidget(color)
+        self.__colorPickerWidget = ColorPickerWidget(color, orientation)
 
         lay = QHBoxLayout()
         lay.addWidget(self.__colorPickerWidget)
@@ -32,18 +32,32 @@ class ColorPickerDialog(QDialog):
         okBtn.clicked.connect(self.accept)
         cancelBtn.clicked.connect(self.close)
 
-        lay = QHBoxLayout()
-        lay.setAlignment(Qt.AlignRight)
-        lay.addWidget(okBtn)
-        lay.addWidget(cancelBtn)
-        lay.setContentsMargins(0, 0, 0, 0)
+        if orientation == 'horizontal':
+            lay = QHBoxLayout()
+            lay.setAlignment(Qt.AlignRight)
+            lay.addWidget(okBtn)
+            lay.addWidget(cancelBtn)
+            lay.setContentsMargins(0, 0, 0, 0)
 
-        bottomWidget = QWidget()
-        bottomWidget.setLayout(lay)
+            bottomWidget = QWidget()
+            bottomWidget.setLayout(lay)
 
-        lay = QVBoxLayout()
-        lay.addWidget(topWidget)
-        lay.addWidget(bottomWidget)
+            lay = QVBoxLayout()
+            lay.addWidget(topWidget)
+            lay.addWidget(bottomWidget)
+        elif orientation == 'vertical':
+            lay = QVBoxLayout()
+            lay.setAlignment(Qt.AlignBottom)
+            lay.addWidget(okBtn)
+            lay.addWidget(cancelBtn)
+            lay.setContentsMargins(0, 0, 0, 0)
+
+            rightWidget = QWidget()
+            rightWidget.setLayout(lay)
+
+            lay = QHBoxLayout()
+            lay.addWidget(topWidget)
+            lay.addWidget(rightWidget)
 
         self.setLayout(lay)
 
