@@ -44,6 +44,7 @@ https://user-images.githubusercontent.com/55078043/144693507-7b078c86-8c71-4df5-
 
 ### Using as a part of window
 
+#### Code Sample
 ```python
 from PyQt5.QtWidgets import QMainWindow, QApplication, QHBoxLayout, QWidget, QTextEdit
 from pyqt_color_picker import ColorPickerWidget
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 ```
 
-Result
+#### Result
 
 ![image](https://user-images.githubusercontent.com/55078043/173720243-f7867319-dd44-44f4-9569-56cee298330f.png)
 
