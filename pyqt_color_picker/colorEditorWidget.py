@@ -13,7 +13,8 @@ class ColorEditorWidget(QWidget):
 
     def __initUi(self, color):
         self.__colorPreviewWithGraphics = QWidget()
-        self.__colorPreviewWithGraphics.setMinimumSize(100, 75)
+        self.__colorPreviewWithGraphics.setFixedWidth(200)
+        self.__colorPreviewWithGraphics.setMinimumHeight(75)
         self.setColorPreviewWithGraphics()
 
         self.__hLineEdit = QLineEdit()

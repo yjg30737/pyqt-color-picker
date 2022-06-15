@@ -1,6 +1,7 @@
 import colorsys
 
 from PyQt5.QtGui import QColor
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout
 
 from pyqt_color_picker.colorHueBarWidget import ColorHueBarWidget
@@ -32,6 +33,7 @@ class ColorPickerWidget(QWidget):
         lay.addWidget(self.__colorSquareWidget)
         lay.addWidget(self.__colorHueBarWidget)
         lay.addWidget(self.__colorEditorWidget)
+        lay.setAlignment(Qt.AlignTop)
 
         mainWidget = QWidget()
         mainWidget.setLayout(lay)

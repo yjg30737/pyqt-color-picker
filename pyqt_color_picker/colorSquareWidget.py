@@ -15,7 +15,7 @@ class ColorSquareWidget(QWidget):
         self.__initUi(color)
 
     def __initUi(self, color):
-        self.setMinimumSize(300, 300)
+        self.setFixedSize(300, 300)
 
         self.__h, \
         self.__s, \
@@ -41,19 +41,19 @@ class ColorSquareWidget(QWidget):
         self.__selector_diameter = 12
 
         self.__selector = QWidget(self.__blackOverlay)
-        self.__selector.setGeometry(math.floor(self.__selector_diameter/2) * -1,
-                                    math.floor(self.__selector_diameter/2) * -1,
+        self.__selector.setGeometry(math.floor(self.__selector_diameter / 2) * -1,
+                                    math.floor(self.__selector_diameter / 2) * -1,
                                     self.__selector_diameter,
                                     self.__selector_diameter)
         PyQtResourceHelper.setStyleSheet([self.__selector], ['style/color_selector.css'])
 
         self.__blackRingInsideSelector = QLabel(self.__selector)
-        self.__blackRingInsideSelector_diameter = self.__selector_diameter-2
+        self.__blackRingInsideSelector_diameter = self.__selector_diameter - 2
         self.__blackRingInsideSelector.setGeometry(QRect(1, 1, self.__blackRingInsideSelector_diameter,
-                                                               self.__blackRingInsideSelector_diameter))
+                                                         self.__blackRingInsideSelector_diameter))
 
         PyQtResourceHelper.setStyleSheet([self.__blackRingInsideSelector], ['style/black_ring_of_color_selector.css'])
-        
+
         lay = QGridLayout()
         lay.addWidget(self.__colorView, 0, 0, 1, 1)
         lay.addWidget(self.__blackOverlay, 0, 0, 1, 1)
@@ -85,9 +85,9 @@ class ColorSquareWidget(QWidget):
             if pos.y() > 300:
                 pos.setY(300)
 
-            self.__selector.move(pos - QPoint(math.floor(self.__selector_diameter/2),
-                                              math.floor(self.__selector_diameter/2)))
-            
+            self.__selector.move(pos - QPoint(math.floor(self.__selector_diameter / 2),
+                                              math.floor(self.__selector_diameter / 2)))
+
             self.__setSaturation()
             self.__setLightness()
 
@@ -116,13 +116,14 @@ class ColorSquareWidget(QWidget):
         ''')
 
     def __setSaturation(self):
-        self.__s = (self.__selector.pos().x()+math.floor(self.__selector_diameter/2)) / self.minimumWidth()
+        self.__s = (self.__selector.pos().x() + math.floor(self.__selector_diameter / 2)) / self.minimumWidth()
 
     def getSaturatation(self):
         return self.__s
 
     def __setLightness(self):
-        self.__l = abs(((self.__selector.pos().y()+math.floor(self.__selector_diameter/2)) / self.minimumHeight()) - 1)
+        self.__l = abs(
+            ((self.__selector.pos().y() + math.floor(self.__selector_diameter / 2)) / self.minimumHeight()) - 1)
 
     def getLightness(self):
         return self.__l

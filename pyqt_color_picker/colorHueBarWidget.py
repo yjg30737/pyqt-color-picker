@@ -17,7 +17,7 @@ class ColorHueBarWidget(QWidget):
     def __initUi(self, color):
         self.__hue_bar_height = 300
         self.__hue_bar_width = 20
-        self.setMinimumSize(self.__hue_bar_width, self.__hue_bar_height)
+        self.setFixedSize(self.__hue_bar_width, self.__hue_bar_height)
 
         self.__hue_selector_height = 15
         self.__hue_selector_moving_range = self.__hue_bar_height-self.__hue_selector_height
