@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QDialog, QHBoxLayout, QPushButton, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QDialog, QHBoxLayout, QPushButton, QWidget, QVBoxLayout, QFrame
 from PyQt5.QtCore import Qt
 
 from pyqt_color_picker.colorPickerWidget import ColorPickerWidget
@@ -42,8 +42,14 @@ class ColorPickerDialog(QDialog):
             bottomWidget = QWidget()
             bottomWidget.setLayout(lay)
 
+            sep = QFrame()
+            sep.setFrameShape(QFrame.HLine)
+            sep.setFrameShadow(QFrame.Sunken)
+            sep.setContentsMargins(0, 0, 0, 0)
+
             lay = QVBoxLayout()
             lay.addWidget(topWidget)
+            lay.addWidget(sep)
             lay.addWidget(bottomWidget)
         elif orientation == 'vertical':
             lay = QHBoxLayout()
@@ -62,8 +68,14 @@ class ColorPickerDialog(QDialog):
             rightWidget = QWidget()
             rightWidget.setLayout(lay)
 
+            sep = QFrame()
+            sep.setFrameShape(QFrame.VLine)
+            sep.setFrameShadow(QFrame.Sunken)
+            sep.setContentsMargins(0, 0, 0, 0)
+
             lay = QHBoxLayout()
             lay.addWidget(leftWidget)
+            lay.addWidget(sep)
             lay.addWidget(rightWidget)
 
         self.setLayout(lay)
