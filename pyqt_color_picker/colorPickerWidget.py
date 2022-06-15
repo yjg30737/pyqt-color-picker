@@ -2,7 +2,7 @@ import colorsys
 
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QSizePolicy, QGridLayout
 
 from pyqt_color_picker.colorHueBarWidget import ColorHueBarWidget
 from pyqt_color_picker.colorEditorWidget import ColorEditorWidget
@@ -10,15 +10,15 @@ from pyqt_color_picker.colorSquareWidget import ColorSquareWidget
 
 
 class ColorPickerWidget(QWidget):
-    def __init__(self, color=QColor(255, 255, 255)):
+    def __init__(self, color=QColor(255, 255, 255), orientation='horizontal'):
         super().__init__()
         if isinstance(color, QColor):
             pass
         elif isinstance(color, str):
             color = QColor(color)
-        self.__initUi(color=color)
+        self.__initUi(color=color, orientation=orientation)
 
-    def __initUi(self, color):
+    def __initUi(self, color, orientation):
         self.__colorSquareWidget = ColorSquareWidget(color)
         self.__colorSquareWidget.colorChanged.connect(self.__colorChanged)
 
@@ -29,17 +29,21 @@ class ColorPickerWidget(QWidget):
         self.__colorEditorWidget = ColorEditorWidget(color)
         self.__colorEditorWidget.colorChanged.connect(self.__colorChangedByEditor)
 
-        lay = QHBoxLayout()
-        lay.addWidget(self.__colorSquareWidget)
-        lay.addWidget(self.__colorHueBarWidget)
-        lay.addWidget(self.__colorEditorWidget)
+        if orientation == 'horizontal':
+            lay = QHBoxLayout()
+            lay.addWidget(self.__colorSquareWidget)
+            lay.addWidget(self.__colorHueBarWidget)
+            lay.addWidget(self.__colorEditorWidget)
+        elif orientation == 'vertical':
+            lay = QGridLayout()
+            lay.addWidget(self.__colorSquareWidget, 0, 0, 1, 1)
+            lay.addWidget(self.__colorHueBarWidget, 0, 1, 1, 1)
+            lay.addWidget(self.__colorEditorWidget, 1, 0, 1, 2)
         lay.setAlignment(Qt.AlignTop)
 
         mainWidget = QWidget()
         mainWidget.setLayout(lay)
         lay.setContentsMargins(0, 0, 0, 0)
-
-        self.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
 
         self.setLayout(lay)
 
