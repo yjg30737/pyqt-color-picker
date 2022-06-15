@@ -8,12 +8,16 @@ PyQt5 >= 5.8
 `python -m pip install pyqt-color-picker`
 
 ## Class, Method Overview
+### `ColorPickerDialog`
 * `ColorPickerDialog(color=QColor(255, 255, 255), orientation='horizontal')`
   * `color` argument's type can be `QColor` or `str`.
   * `orientation` argument decides the overall layout direction of the dialog. There are two values. `'horizontal'`, `'vertical'`. See layout preview below.
 * `getColor() -> QColor` - get the color.
 
 If you only want to use this as a part of window(not as whole dialog), use `ColorPickerWidget(color=QColor(255, 255, 255), orientation='horizontal')`. See the example below.
+
+### `ColorPickerWidget`
+* `colorChanged` - signal. After color being changed, this will be emitted.
 
 ### Layout type
 
