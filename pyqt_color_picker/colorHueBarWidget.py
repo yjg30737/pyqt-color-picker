@@ -1,7 +1,6 @@
 import math, colorsys
 
 from PyQt5.QtCore import QPoint, Qt, pyqtSignal
-from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QLabel
 from pyqt_resource_helper import PyQtResourceHelper
 

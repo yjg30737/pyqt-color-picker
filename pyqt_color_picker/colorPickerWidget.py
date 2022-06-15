@@ -2,7 +2,7 @@ import colorsys
 
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QSizePolicy, QGridLayout
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QGridLayout
 
 from pyqt_color_picker.colorHueBarWidget import ColorHueBarWidget
 from pyqt_color_picker.colorEditorWidget import ColorEditorWidget
