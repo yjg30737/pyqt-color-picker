@@ -16,6 +16,7 @@ class ColorPickerDialog(QDialog):
 
     def __initUi(self, color, orientation):
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
+        self.setWindowTitle('Pick the color')
 
         self.__colorPickerWidget = ColorPickerWidget(color, orientation)
 
