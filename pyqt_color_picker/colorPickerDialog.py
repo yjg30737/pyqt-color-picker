@@ -19,13 +19,6 @@ class ColorPickerDialog(QDialog):
 
         self.__colorPickerWidget = ColorPickerWidget(color, orientation)
 
-        lay = QHBoxLayout()
-        lay.addWidget(self.__colorPickerWidget)
-        lay.setContentsMargins(0, 0, 0, 0)
-
-        topWidget = QWidget()
-        topWidget.setLayout(lay)
-
         okBtn = QPushButton('OK')
         cancelBtn = QPushButton('Cancel')
 
@@ -33,6 +26,13 @@ class ColorPickerDialog(QDialog):
         cancelBtn.clicked.connect(self.close)
 
         if orientation == 'horizontal':
+            lay = QHBoxLayout()
+            lay.addWidget(self.__colorPickerWidget)
+            lay.setContentsMargins(0, 0, 0, 0)
+
+            topWidget = QWidget()
+            topWidget.setLayout(lay)
+
             lay = QHBoxLayout()
             lay.setAlignment(Qt.AlignRight)
             lay.addWidget(okBtn)
@@ -46,6 +46,13 @@ class ColorPickerDialog(QDialog):
             lay.addWidget(topWidget)
             lay.addWidget(bottomWidget)
         elif orientation == 'vertical':
+            lay = QHBoxLayout()
+            lay.addWidget(self.__colorPickerWidget)
+            lay.setContentsMargins(0, 0, 0, 0)
+
+            leftWidget = QWidget()
+            leftWidget.setLayout(lay)
+
             lay = QVBoxLayout()
             lay.setAlignment(Qt.AlignBottom)
             lay.addWidget(okBtn)
@@ -56,7 +63,7 @@ class ColorPickerDialog(QDialog):
             rightWidget.setLayout(lay)
 
             lay = QHBoxLayout()
-            lay.addWidget(topWidget)
+            lay.addWidget(leftWidget)
             lay.addWidget(rightWidget)
 
         self.setLayout(lay)
