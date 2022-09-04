@@ -19,7 +19,7 @@ PyQt5 >= 5.8
 If you only want to use this as a part of window(not as whole dialog), use `ColorPickerWidget(color=QColor(255, 255, 255), orientation='horizontal')`. See the example below.
 
 ### `ColorPickerWidget`
-* `colorChanged` - signal. After color being changed, this will be emitted.
+* `colorChanged(color: QColor)` - signal. After color being changed, this will be emitted.
 * `getCurrentColor() -> QColor` - get the current color.
 
 ### Layout type
