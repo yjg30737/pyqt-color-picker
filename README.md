@@ -74,11 +74,7 @@ class Window(QMainWindow):
         self.setCentralWidget(mainWidget)
 
     def colorChanged(self, color):
-        self.__te.selectAll()
-        self.__te.setTextColor(color)
-        cur = self.__te.textCursor()
-        cur.clearSelection()
-        self.__te.setTextCursor(cur)
+        self.__te.setStyleSheet(f'QTextEdit {{ color: {color.name()} }}')
 
 
 if __name__ == "__main__":
