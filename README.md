@@ -63,14 +63,22 @@ class Window(QMainWindow):
         self.__initUi()
 
     def __initUi(self):
-        te = QTextEdit()
-        colorPicker = ColorPickerWidget(orientation='vertical')
+        self.__te = QTextEdit()
+        self.__colorPicker = ColorPickerWidget(orientation='vertical')
+        self.__colorPicker.colorChanged.connect(self.colorChanged)
         lay = QHBoxLayout()
-        lay.addWidget(te)
-        lay.addWidget(colorPicker)
+        lay.addWidget(self.__te)
+        lay.addWidget(self.__colorPicker)
         mainWidget = QWidget()
         mainWidget.setLayout(lay)
         self.setCentralWidget(mainWidget)
+
+    def colorChanged(self, color):
+        self.__te.selectAll()
+        self.__te.setTextColor(color)
+        cur = self.__te.textCursor()
+        cur.clearSelection()
+        self.__te.setTextCursor(cur)
 
 
 if __name__ == "__main__":
@@ -84,6 +92,8 @@ if __name__ == "__main__":
 
 #### Result
 
-![image](https://user-images.githubusercontent.com/55078043/173720243-f7867319-dd44-44f4-9569-56cee298330f.png)
+https://user-images.githubusercontent.com/55078043/189460590-18bc80b5-fb48-43f7-891f-dd6cf48243ee.mp4
+
+
 
 
