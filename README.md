@@ -65,7 +65,7 @@ class Window(QMainWindow):
     def __initUi(self):
         self.__te = QTextEdit()
         self.__colorPicker = ColorPickerWidget(orientation='vertical')
-        self.__colorPicker.colorChanged.connect(self.colorChanged)
+        self.__colorPicker.colorChanged.connect(self.colorChanged) # when color has changed, call the colorChanged function
         lay = QHBoxLayout()
         lay.addWidget(self.__te)
         lay.addWidget(self.__colorPicker)
