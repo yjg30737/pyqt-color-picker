@@ -11,10 +11,16 @@ class ColorSquareWidget(QWidget):
 
     def __init__(self, color):
         super().__init__()
+        self.__initVal()
         self.__initUi(color)
 
+    def __initVal(self):
+        # default width and height
+        self.__w = 300
+        self.__h = 300
+
     def __initUi(self, color):
-        self.setFixedSize(300, 300)
+        self.setFixedSize(self.__w, self.__h)
 
         self.__h, \
         self.__s, \
@@ -79,10 +85,10 @@ class ColorSquareWidget(QWidget):
                 pos.setX(0)
             if pos.y() < 0:
                 pos.setY(0)
-            if pos.x() > 300:
-                pos.setX(300)
-            if pos.y() > 300:
-                pos.setY(300)
+            if pos.x() > self.__w:
+                pos.setX(self.__w)
+            if pos.y() > self.__h:
+                pos.setY(self.__h)
 
             self.__selector.move(pos - QPoint(math.floor(self.__selector_diameter / 2),
                                               math.floor(self.__selector_diameter / 2)))

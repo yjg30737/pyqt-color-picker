@@ -11,14 +11,20 @@ class ColorHueBarWidget(QWidget):
 
     def __init__(self, color):
         super().__init__()
+        self.__initVal()
         self.__initUi(color)
 
+    def __initVal(self):
+        # default width and height
+        self.__w = 20
+        self.__h = 300
+
     def __initUi(self, color):
-        self.__hue_bar_height = 300
-        self.__hue_bar_width = 20
+        self.__hue_bar_height = self.__h
+        self.__hue_bar_width = self.__w
         self.setFixedSize(self.__hue_bar_width, self.__hue_bar_height)
 
-        self.__hue_selector_height = 15
+        self.__hue_selector_height = self.__h//20
         self.__hue_selector_moving_range = self.__hue_bar_height-self.__hue_selector_height
 
         hueFrame = QWidget(self)
