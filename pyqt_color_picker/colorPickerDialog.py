@@ -86,3 +86,6 @@ class ColorPickerDialog(QDialog):
 
     def getColor(self) -> QColor:
         return self.__colorPickerWidget.getCurrentColor()
+
+    # def getWidget(self):
+    #     return self.__colorPickerWidget

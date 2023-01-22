@@ -72,3 +72,12 @@ class ColorPickerWidget(QWidget):
 
     def getCurrentColor(self):
         return self.__colorEditorWidget.getCurrentColor()
+
+    # def getColorSquareWidget(self):
+    #     return self.__colorSquareWidget
+    #
+    # def getColorHueBarWidget(self):
+    #     return self.__colorHueBarWidget
+    #
+    # def getColorEditorWidget(self):
+    #     return self.__colorEditorWidget
