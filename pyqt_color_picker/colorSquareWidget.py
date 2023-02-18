@@ -1,9 +1,8 @@
-import math, colorsys
+import os, math, colorsys, posixpath
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel
 
 from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect
-from pyqt_resource_helper import PyQtResourceHelper
 
 
 class ColorSquareWidget(QWidget):
@@ -16,11 +15,11 @@ class ColorSquareWidget(QWidget):
 
     def __initVal(self):
         # default width and height
-        self.__w = 300
-        self.__h = 300
+        self.__width = 300
+        self.__height = 300
 
     def __initUi(self, color):
-        self.setFixedSize(self.__w, self.__h)
+        self.setFixedSize(self.__width, self.__height)
 
         self.__h, \
         self.__s, \
@@ -28,6 +27,7 @@ class ColorSquareWidget(QWidget):
 
         # Multiply 100 for insert into stylesheet code
         self.__h *= 100
+
 
         self.__colorView = QWidget()
         self.__colorView.setStyleSheet(f'''
@@ -38,7 +38,9 @@ class ColorSquareWidget(QWidget):
         ''')
 
         self.__blackOverlay = QWidget()
-        PyQtResourceHelper.setStyleSheet([self.__blackOverlay], ['style/black_overlay.css'])
+
+        with open(os.path.join(os.path.dirname(__file__), 'style/black_overlay.css').replace(os.path.sep, posixpath.sep), 'r') as f:
+            self.__blackOverlay.setStyleSheet(f.read())
 
         self.__blackOverlay.mouseMoveEvent = self.__moveSelectorByCursor
         self.__blackOverlay.mousePressEvent = self.__moveSelectorByCursor
@@ -50,14 +52,16 @@ class ColorSquareWidget(QWidget):
                                     math.floor(self.__selector_diameter / 2) * -1,
                                     self.__selector_diameter,
                                     self.__selector_diameter)
-        PyQtResourceHelper.setStyleSheet([self.__selector], ['style/color_selector.css'])
+
+        with open(os.path.join(os.path.dirname(__file__), 'style/color_selector.css').replace(os.path.sep, posixpath.sep), 'r') as f:
+            self.__selector.setStyleSheet(f.read())
 
         self.__blackRingInsideSelector = QLabel(self.__selector)
         self.__blackRingInsideSelector_diameter = self.__selector_diameter - 2
         self.__blackRingInsideSelector.setGeometry(QRect(1, 1, self.__blackRingInsideSelector_diameter,
                                                          self.__blackRingInsideSelector_diameter))
-
-        PyQtResourceHelper.setStyleSheet([self.__blackRingInsideSelector], ['style/black_ring_of_color_selector.css'])
+        with open(os.path.join(os.path.dirname(__file__), 'style/black_ring_of_color_selector.css').replace(os.path.sep, posixpath.sep), 'r') as f:
+            self.__blackRingInsideSelector.setStyleSheet(f.read())
 
         lay = QGridLayout()
         lay.addWidget(self.__colorView, 0, 0, 1, 1)
@@ -72,7 +76,7 @@ class ColorSquareWidget(QWidget):
         geo = self.__selector.geometry()
         x = self.minimumWidth() * s
         y = self.minimumHeight() - self.minimumHeight() * l
-        geo.moveCenter(QPoint(x, y))
+        geo.moveCenter(QPoint(int(x), int(y)))
         self.__selector.setGeometry(geo)
 
     def __initSelector(self):
@@ -85,10 +89,10 @@ class ColorSquareWidget(QWidget):
                 pos.setX(0)
             if pos.y() < 0:
                 pos.setY(0)
-            if pos.x() > self.__w:
-                pos.setX(self.__w)
-            if pos.y() > self.__h:
-                pos.setY(self.__h)
+            if pos.x() > self.__width:
+                pos.setX(int(self.__width))
+            if pos.y() > self.__height:
+                pos.setY(int(self.__height))
 
             self.__selector.move(pos - QPoint(math.floor(self.__selector_diameter / 2),
                                               math.floor(self.__selector_diameter / 2)))
