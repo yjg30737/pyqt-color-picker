@@ -63,13 +63,13 @@ class ColorEditorWidget(QWidget):
 
         self.setLayout(lay)
 
-        self.setColor(color)
+        self.setCurrentColor(color)
 
     def setColorPreviewWithGraphics(self):
         self.__colorPreviewWithGraphics.setStyleSheet(f' border-radius: 5px; '
                                                       f'background-color: {self.__current_color.name()}; ')
 
-    def setColor(self, color):
+    def setCurrentColor(self, color):
         self.__current_color = color
         self.setColorPreviewWithGraphics()
         self.__hLineEdit.setText(self.__current_color.name())

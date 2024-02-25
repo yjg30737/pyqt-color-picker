@@ -4,6 +4,7 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QSizePolicy, QGridLayout
 
+from pyqt_color_picker.script import getColorByInstance
 from pyqt_color_picker.colorHueBarWidget import ColorHueBarWidget
 from pyqt_color_picker.colorEditorWidget import ColorEditorWidget
 from pyqt_color_picker.colorSquareWidget import ColorSquareWidget
@@ -14,10 +15,7 @@ class ColorPickerWidget(QWidget):
 
     def __init__(self, color=QColor(255, 255, 255), orientation='horizontal'):
         super().__init__()
-        if isinstance(color, QColor):
-            pass
-        elif isinstance(color, str):
-            color = QColor(color)
+        color = getColorByInstance(color)
         self.__initUi(color=color, orientation=orientation)
 
     def __initUi(self, color, orientation):
@@ -31,6 +29,7 @@ class ColorPickerWidget(QWidget):
         self.__colorEditorWidget = ColorEditorWidget(color, orientation=orientation)
         self.__colorEditorWidget.colorChanged.connect(self.__colorChangedByEditor)
 
+        # Set UI
         if orientation == 'horizontal':
             lay = QHBoxLayout()
             lay.addWidget(self.__colorSquareWidget)
@@ -61,7 +60,7 @@ class ColorPickerWidget(QWidget):
     def __colorChanged(self, h, s, l):
         r, g, b = self.hsv2rgb(h / 100, s, l)
         color = QColor(r, g, b)
-        self.__colorEditorWidget.setColor(color)
+        self.__colorEditorWidget.setCurrentColor(color)
         self.colorChanged.emit(color)
 
     def __colorChangedByEditor(self, color: QColor):
@@ -69,6 +68,11 @@ class ColorPickerWidget(QWidget):
         self.__colorHueBarWidget.moveSelectorByEditor(h)
         self.__colorSquareWidget.moveSelectorByEditor(s, v)
         self.colorChanged.emit(color)
+
+    def setCurrentColor(self, color):
+        color = getColorByInstance(color)
+        self.__colorEditorWidget.setCurrentColor(color)
+        self.__colorChangedByEditor(color)
 
     def getCurrentColor(self):
         return self.__colorEditorWidget.getCurrentColor()

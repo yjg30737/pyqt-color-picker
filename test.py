@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QHBoxLayout, QWidget, QTextEdit
 from pyqt_color_picker import ColorPickerWidget
 
@@ -11,6 +12,7 @@ class Window(QMainWindow):
         self.__te = QTextEdit()
         self.__colorPicker = ColorPickerWidget(orientation='vertical')
         self.__colorPicker.colorChanged.connect(self.colorChanged) # when color has changed, call the colorChanged function
+        # self.__colorPicker.setCurrentColor('yellow')
         lay = QHBoxLayout()
         lay.addWidget(self.__te)
         lay.addWidget(self.__colorPicker)
