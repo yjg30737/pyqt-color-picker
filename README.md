@@ -21,6 +21,7 @@ If you only want to use this as a part of window(not as whole dialog), use `Colo
 ### `ColorPickerWidget`
 * `colorChanged(color: QColor)` - signal. After color being changed, this will be emitted.
 * `getCurrentColor() -> QColor` - get the current color.
+* `setCurrentColor(QColor|str)` - set the current color.
 
 ### Layout type
 
